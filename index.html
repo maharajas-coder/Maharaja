@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maharaja S | Portfolio</title>
+<meta name="description" content="Maharaja S, first-year B.Tech IT student. A hand-built portfolio on a retro desktop.">
+<meta name="theme-color" content="#1f6f6b">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=VT323&display=swap" rel="stylesheet">
+<script>
+document.documentElement.className='js';
+try{var s=localStorage.getItem('ms-theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}
+</script>
+<style>
+/* Colours: teal + warm yellow + ink/paper neutrals. Edit the variables to re-colour everything. */
+:root{--desk:#1f6f6b;--dot:#195b58;--win:#eee8d5;--text:#1b1a17;--line:#1b1a17;--sh:#1b1a17;--hi:#f0b429;--hit:#1b1a17;--link:#1f6f6b;--name:#eee8d5;--nsh:#1b1a17}
+[data-theme=dark]{--desk:#100d06;--dot:#19150a;--win:#17130a;--text:#f0b429;--line:#f0b429;--sh:#1f6f6b;--hi:#f0b429;--hit:#17130a;--link:#4fc1b8;--name:#f0b429;--nsh:#1f6f6b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+html.lock{overflow:hidden}
+body{margin:0;color:var(--text);font:1.4rem/1.3 'VT323',monospace;background:repeating-conic-gradient(var(--dot) 0 25%,transparent 0 50%) 0 0/4px 4px var(--desk);-webkit-font-smoothing:none}
+h1,h2,h3,b,.btn,.hd{font-family:'Pixelify Sans',monospace}
+a{color:var(--link);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{background:var(--hi);color:var(--hit)}
+:focus-visible{outline:3px dashed var(--line);outline-offset:3px}
+.hero :focus-visible,.mb :focus-visible{outline-color:var(--hi)}
+
+/* menu bar */
+.mb{position:fixed;top:0;left:0;right:0;z-index:50;height:40px;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--win);border-bottom:2px solid var(--line);color:var(--text)}
+.brand{display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;flex:none}
+.brand svg{width:22px;height:22px;display:block}
+.brand b{font-size:1.1rem}
+.mb nav{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none;min-width:0}
+.mb nav::-webkit-scrollbar{display:none}
+.mb nav a{color:var(--text);text-decoration:none;padding:1px 9px;font-size:1.3rem;white-space:nowrap}
+.mb nav a:hover,.mb nav a.on{background:var(--hi);color:var(--hit)}
+#clock{flex:none;font-size:1.25rem;display:none}
+.sw{flex:none;display:flex;align-items:center;gap:7px;border:0;background:none;color:var(--text);font:inherit;cursor:pointer;padding:4px}
+.sw em{font-style:normal;font-size:1.15rem;display:none;opacity:.55}
+.sw[aria-checked=false] em:first-child,.sw[aria-checked=true] em:last-child{opacity:1}
+.trk{display:block;width:40px;height:20px;border:2px solid var(--line);background:var(--win);position:relative;box-shadow:2px 2px 0 var(--sh)}
+.kn{position:absolute;top:2px;left:2px;width:12px;height:12px;background:var(--line);transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+.sw[aria-checked=true] .kn{transform:translateX(20px)}
+@media(min-width:640px){#clock{display:block}.sw em{display:inline}}
+@media(max-width:480px){.brand b{display:none}}
+
+/* windows */
+.win{background:var(--win);border:2px solid var(--line);box-shadow:6px 6px 0 var(--sh);color:var(--text);max-width:46rem}
+.tb{position:relative;height:28px;display:flex;align-items:center;justify-content:center;border-bottom:2px solid var(--line);background:repeating-linear-gradient(var(--line) 0 1px,transparent 1px 3px) 0 50%/100% 14px no-repeat}
+.tb b{background:var(--win);padding:0 10px;font-size:1rem;font-weight:500}
+.cb{position:absolute;left:8px;top:5px;width:14px;height:14px;border:2px solid var(--line);background:var(--win)}
+.bd{padding:18px 18px 22px}
+.bd p{margin:0 0 .75em;font-size:1.5rem;line-height:1.25}
+h2{font-size:clamp(1.9rem,6.4vw,3rem);line-height:1.05;font-weight:600;margin:0 0 .5em}
+.sec{max-width:1080px;margin:0 auto;padding:clamp(56px,10vw,120px) 16px 0}
+@media(min-width:860px){.R{margin-left:auto}}
+
+/* boot */
+#boot{position:fixed;inset:0;z-index:100;display:none;color:var(--text)}
+.js #boot{display:block}
+.strips{position:absolute;inset:0;display:flex}
+.st{flex:1;background:var(--win);box-shadow:0 0 0 1px var(--win);transition:transform .45s cubic-bezier(.7,0,.2,1);transition-delay:calc(var(--i)*40ms)}
+#boot.wipe .st{transform:translateY(-101%)}
+.bt{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:22px 20px 26px;transition:opacity .15s}
+#boot.wipe .bt{opacity:0}
+.bt .top{display:flex;align-items:center;gap:12px;font-size:1.5rem}
+.bt .top svg{width:34px;height:34px}
+.bt .bot{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.count{font:700 clamp(7rem,34vw,18rem)/.8 'Pixelify Sans',monospace;display:flex;align-items:flex-start}
+.count i{font-style:normal;font-size:.28em;margin:.1em 0 0 .08em}
+
+/* hero */
+.hero{min-height:100svh;max-width:1080px;margin:0 auto;padding:80px 16px 56px;display:flex;flex-direction:column;justify-content:center}
+.icon{align-self:flex-end;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;color:var(--name);font:inherit;font-size:1.3rem;cursor:pointer;margin-bottom:12px}
+.icon .tile{display:block;width:84px;height:84px;background:var(--hi);border:2px solid var(--line);box-shadow:4px 4px 0 var(--sh);color:var(--hit)}
+.icon .tile svg{width:100%;height:100%;display:block}
+.icon:active .tile{transform:translate(4px,4px);box-shadow:none}
+.name{margin:0 0 30px;font-weight:700;font-size:clamp(3.4rem,15.4vw,10.5rem);line-height:.92;color:var(--name);text-shadow:.05em .05em 0 var(--nsh)}
+.name span{display:block}
+.caret{display:inline-block;width:.34em;height:.62em;background:var(--hi);margin-left:.14em;animation:blink 1s steps(1) infinite;text-shadow:none}
+@keyframes blink{50%{opacity:0}}
+.note{max-width:31rem}
+@media(min-width:860px){.note{margin-left:7%}}
+.tag{font-size:1.75rem!important;line-height:1.15!important}
+.now b{background:var(--hi);color:var(--hit);padding:0 7px;margin-right:6px;font-weight:500;font-size:1.1rem}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+.btn{display:inline-block;font-size:1.1rem;font-weight:600;padding:9px 22px;border:2px solid var(--line);border-radius:10px;background:var(--win);color:var(--text);box-shadow:3px 3px 0 var(--sh);cursor:pointer;text-decoration:none}
+.btn.pri{background:var(--hi);color:var(--hit);outline:2px solid var(--line);outline-offset:2px}
+.btn:hover{background:var(--hi);color:var(--hit)}
+.btn:active{transform:translate(3px,3px);box-shadow:none}
+
+/* about */
+.g{display:grid;gap:30px}
+@media(min-width:860px){.g{grid-template-columns:1.7fr 1fr}.info{margin-top:84px}}
+.info dl{margin:0;font-size:1.4rem}
+.info dl div{display:flex;gap:10px;padding:5px 0;border-bottom:1px dotted var(--line)}
+.info dt{flex:none;width:6.2rem;opacity:.7}
+.info dd{margin:0}
+
+/* skills list */
+.list{list-style:none;margin:0 0 14px;padding:0;border:2px solid var(--line)}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:5px 12px;border-bottom:1px dotted var(--line);font-size:1.45rem}
+.list li:last-child{border-bottom:0}
+.list li.h{background:var(--line);color:var(--win);font-family:'Pixelify Sans',monospace;font-size:1rem;font-weight:500}
+.list li:not(.h):hover{background:var(--hi);color:var(--hit)}
+.lv.ok{background:var(--hi);color:var(--hit);padding:0 8px}
+.list li:not(.h):hover .lv.ok{background:var(--win);color:var(--text)}
+
+/* journey */
+.dir{display:grid;gap:6px;padding:16px 0;border-top:2px dashed var(--line)}
+.dir:first-of-type{border-top:0;padding-top:0}
+.dir .lab{display:flex;align-items:center;gap:10px}
+.dir .lab b{font-size:1.25rem;font-weight:600}
+.dir ul{list-style:none;margin:0;padding:0}
+.dir li{position:relative;padding-left:1.3em;font-size:1.45rem;margin-bottom:.3em;line-height:1.2}
+.dir li::before{content:"";position:absolute;left:0;top:.42em;width:8px;height:8px;background:var(--line)}
+@media(min-width:600px){.dir{grid-template-columns:11rem 1fr}}
+
+/* fun facts */
+.txt{list-style:none;margin:0;padding:0;counter-reset:l}
+.txt li{counter-increment:l;display:grid;grid-template-columns:2.4rem 1fr;font-size:1.45rem;line-height:1.2;padding:4px 0}
+.txt li::before{content:counter(l,decimal-leading-zero);opacity:.5}
+.todo{background:var(--hi);color:var(--hit);padding:0 6px;margin-right:6px}
+
+/* contact */
+.mail{margin:0 0 14px}
+.mail div{display:flex;gap:12px;padding:4px 0;border-bottom:1px dotted var(--line);font-size:1.4rem}
+.mail dt{width:5.5rem;opacity:.7;flex:none}
+.mail dd{margin:0}
+.links{list-style:none;margin:0 0 18px;padding:0}
+.links li{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:1.45rem;padding:3px 0}
+.links span{width:6rem;opacity:.7}
+.status{margin-top:clamp(70px,12vw,130px);background:var(--win);color:var(--text);border-top:2px solid var(--line);padding:9px 16px;font-size:1.2rem;display:flex;flex-wrap:wrap;gap:4px 24px;justify-content:space-between}
+
+/* easter egg + theme flicker */
+.over{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px;background:repeating-conic-gradient(rgba(0,0,0,.55) 0 25%,transparent 0 50%) 0 0/4px 4px}
+.over[hidden]{display:none}
+.alert{max-width:26rem;width:100%}
+.alert .bd{display:flex;gap:16px;align-items:flex-start}
+.alert svg{width:56px;height:56px;flex:none}
+.alert p{font-size:1.4rem!important}
+#flick{position:fixed;inset:0;z-index:80;pointer-events:none;background:#000;opacity:0}
+.flick #flick{animation:fl .35s steps(4)}
+@keyframes fl{0%{opacity:.55}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div id="boot" aria-label="Loading">
+  <div class="strips" id="strips"></div>
+  <div class="bt">
+    <div class="top"><span data-mono></span><span>Starting up Maharaja.sys</span></div>
+    <div class="bot">
+      <div class="count" aria-live="off"><span id="n">0</span><i>%</i></div>
+      <button class="btn" id="skip" type="button">Skip</button>
+    </div>
+  </div>
+</div>
+
+<div class="mb">
+  <a class="brand" href="#home" aria-label="Maharaja S, home"><span data-mono></span><b>Maharaja.sys</b></a>
+  <nav aria-label="Sections">
+    <a href="#about">About</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#beyond">Beyond code</a><a href="#contact">Contact</a>
+  </nav>
+  <span id="clock" aria-hidden="true"></span>
+  <button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-label="Amber screen mode">
+    <em>Paper</em><span class="trk"><span class="kn"></span></span><em>Amber</em>
+  </button>
+</div>
+
+<main>
+  <section id="home" class="hero">
+    <button class="icon" id="mono" type="button" aria-label="Monogram MS"><span class="tile" data-mono></span><span>ms.app</span></button>
+    <h1 class="name">Maharaja<span>S<i class="caret"></i></span></h1>
+    <div class="win note">
+      <div class="tb"><i class="cb"></i><b>hello.txt</b></div>
+      <div class="bd">
+        <!-- EDIT: tagline and "currently" line, in your own words -->
+        <p class="tag">First-year IT student, learning to build things that feel hand-made.</p>
+        <p class="now"><b>currently…</b>learning JavaScript properly, one small project at a time.</p>
+        <div class="btns">
+          <a class="btn pri" href="#about">Explore</a>
+          <a class="btn" href="#contact">Say hi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="sec">
+    <div class="g">
+      <article class="win">
+        <div class="tb"><i class="cb"></i><b>About Me.txt</b></div>
+        <div class="bd">
+          <!-- EDIT: replace with your own story from your Me-Map answers -->
+          <h2>Hi, I'm Maharaja.</h2>
+          <p>I'm a first-year B.Tech student in Information Technology, which means most days I'm somewhere between "this makes sense" and "why is this not working". I like that stretch. It's where I learn the most.</p>
+          <p>I'm not trying to look like an expert yet. I'm trying to get good at the basics: writing code that runs, reading error messages without panicking, and finishing the thing I started.</p>
+          <p>This site is part of that. I wanted a place that feels like me instead of a template, so I built it from scratch, in one file, dressed up as the old desktop computers I enjoy looking at.</p>
+        </div>
+      </article>
+      <aside class="win info">
+        <div class="tb"><i class="cb"></i><b>Get Info</b></div>
+        <div class="bd">
+          <dl>
+            <div><dt>Name</dt><dd>Maharaja S</dd></div>
+            <div><dt>Studying</dt><dd>B.Tech, Information Technology</dd></div>
+            <div><dt>Year</dt><dd>First</dd></div>
+            <div><dt>Status</dt><dd>Learning, building, breaking things</dd></div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="skills" class="sec">
+    <article class="win R" style="max-width:40rem">
+      <div class="tb"><i class="cb"></i><b>Skills, by level</b></div>
+      <div class="bd">
+        <h2>What I can do, honestly.</h2>
+        <!-- EDIT: change skills and levels to match what is true for you -->
+        <ul class="list">
+          <li class="h"><span>Name</span><span>Level</span></li>
+          <li><span>HTML &amp; CSS</span><span class="lv ok">Comfortable</span></li>
+          <li><span>Problem solving</span><span class="lv">Getting comfortable</span></li>
+          <li><span>JavaScript</span><span class="lv">Learning</span></li>
+          <li><span>C programming</span><span class="lv">Learning</span></li>
+          <li><span>Python</span><span class="lv">Learning</span></li>
+          <li><span>Git &amp; GitHub</span><span class="lv">Learning</span></li>
+        </ul>
+        <p style="margin:0">"Learning" means I still look things up a lot. That's fine by me.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="journey" class="sec">
+    <article class="win" style="max-width:52rem">
+      <div class="tb"><i class="cb"></i><b>Journey</b></div>
+      <div class="bd">
+        <h2>Made, learning, next.</h2>
+        <!-- EDIT: add your real projects -->
+        <div class="dir">
+          <div class="lab"><svg width="30" height="24" viewBox="0 0 20 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 2h7l2 2h9v11H1z" fill="var(--hi)" stroke="var(--line)" stroke-width="1.5"/></svg><b>What I've made</b></div>
+          <ul>
+            <li>This portfolio: one HTML file, no libraries, no image files.</li>
+            <li>Practice programs and class exercises from my first semester.</li>
+          </ul>
+        </div>
+        <div class="dir">
+          <div class="lab"><svg width="30" height="24" viewBox="0 0 20 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 2h7l2 2h9v11H1z" fill="var(--win)" stroke="var(--line)" stroke-width="1.5"/></svg><b>What I'm learning</b></div>
+          <ul>
+            <li>Web basics: HTML, CSS and JavaScript.</li>
+            <li>Programming in C.</li>
+            <li>How computers work underneath the code.</li>
+          </ul>
+        </div>
+        <div class="dir">
+          <div class="lab"><svg width="30" height="24" viewBox="0 0 20 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 2h7l2 2h9v11H1z" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="2 2"/></svg><b>What I want to build</b></div>
+          <ul>
+            <li>A small tool that saves people time.</li>
+            <li>A game, because every developer wants one.</li>
+            <li>A first open-source contribution, even if it's a typo fix.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="beyond" class="sec">
+    <article class="win R" style="max-width:38rem">
+      <div class="tb"><i class="cb"></i><b>fun_facts.txt</b></div>
+      <div class="bd">
+        <h2>The real me, away from the keyboard.</h2>
+        <!-- EDIT: replace each TODO line with a real hobby or fun fact -->
+        <ol class="txt">
+          <li><span>I hand-built this whole portfolio in a single file.</span></li>
+          <li><span><span class="todo">TODO</span>a hobby that has nothing to do with code</span></li>
+          <li><span><span class="todo">TODO</span>a fun fact your friends already know about you</span></li>
+          <li><span><span class="todo">TODO</span>what you're into right now: music, sport, food…</span></li>
+        </ol>
+      </div>
+    </article>
+  </section>
+
+  <section id="contact" class="sec">
+    <article class="win" style="max-width:34rem">
+      <div class="tb"><i class="cb"></i><b>New Message</b></div>
+      <div class="bd">
+        <h2>Say hi.</h2>
+        <dl class="mail"><div><dt>To:</dt><dd>Maharaja S</dd></div><div><dt>Subject:</dt><dd>Hello!</dd></div></dl>
+        <p>Got an idea, a question, or just want to say hi? Send it over.</p>
+        <!-- EDIT: put your real email, LinkedIn and GitHub links here -->
+        <ul class="links">
+          <li><span>Email</span><a href="mailto:hello@example.com">hello@example.com</a></li>
+          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/your-name" target="_blank" rel="noopener">linkedin.com/in/your-name</a></li>
+          <li><span>GitHub</span><a href="https://github.com/your-username" target="_blank" rel="noopener">github.com/your-username</a></li>
+        </ul>
+        <a class="btn pri" href="mailto:hello@example.com?subject=Hello%20Maharaja">Send a hello</a>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer class="status"><span>&copy; 2026 Maharaja S</span><span>Built by hand, in one file.</span></footer>
+
+<div class="over" id="egg" hidden role="dialog" aria-modal="true" aria-labelledby="eggT">
+  <div class="win alert">
+    <div class="tb"><i class="cb"></i><b>System Error</b></div>
+    <div class="bd">
+      <span data-bomb></span>
+      <div>
+        <p id="eggT" style="font-family:'Pixelify Sans',monospace;font-size:1.15rem!important;font-weight:600">Sorry, a system error occurred.</p>
+        <p>Maharaja.sys has too many ideas. You found the hidden bit, so thanks for poking around.</p>
+        <button class="btn pri" id="eggOk" type="button">Restart</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="flick"></div>
+
+<script>
+(function(){
+var d=document,root=d.documentElement,body=d.body;
+function $(s){return d.querySelector(s)}
+function $$(s){return Array.prototype.slice.call(d.querySelectorAll(s))}
+
+/* pixel art from text grids */
+function px(rows,vb,cell){var r='';rows.forEach(function(row,y){for(var x=0;x<row.length;x++)if(row[x]==='X')r+='<rect x="'+(cell.x+x)+'" y="'+(cell.y+y)+'" width="1" height="1"/>'});return '<svg viewBox="'+vb+'" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">'+r+'</svg>'}
+var M=["X...X","XX.XX","X.X.X","X...X","X...X"],S=[".XXXX","X....",".XXX.","....X","XXXX."];
+function mono(){var r='';[[M,0],[S,6]].forEach(function(p){p[0].forEach(function(row,y){for(var x=0;x<5;x++)if(row[x]==='X')r+='<rect x="'+(p[1]+x)+'" y="'+y+'" width="1" height="1"/>'})});return '<svg viewBox="-2 -5 15 15" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">'+r+'</svg>'}
+$$('[data-mono]').forEach(function(e){e.innerHTML=mono()});
+$$('[data-bomb]').forEach(function(e){e.innerHTML=px(["......X.X",".....X.X.","....XX...","..XXXXX..",".XXXXXXX.",".XXXXXXX.",".XXXXXXX.",".XXXXXXX.","..XXXXX.."],'0 0 9 9',{x:0,y:0})});
+
+/* theme switch */
+var sw=$('#theme'),meta=$('meta[name=theme-color]');
+function setTheme(dark,anim){
+  root.dataset.theme=dark?'dark':'light';
+  sw.setAttribute('aria-checked',dark?'true':'false');
+  meta.content=dark?'#100d06':'#1f6f6b';
+  if(anim){root.classList.remove('flick');void root.offsetWidth;root.classList.add('flick')}
+  try{localStorage.setItem('ms-theme',dark?'dark':'light')}catch(e){}
+}
+sw.setAttribute('aria-checked',root.dataset.theme==='dark'?'true':'false');
+meta.content=root.dataset.theme==='dark'?'#100d06':'#1f6f6b';
+sw.addEventListener('click',function(){setTheme(root.dataset.theme!=='dark',true)});
+
+/* opening: 0 to 100, then the page wipes in */
+var boot=$('#boot'),n=$('#n'),done=false,raf,t0,DUR=1500;
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+for(var i=0;i<8;i++){var s=d.createElement('span');s.className='st';s.style.setProperty('--i',i);$('#strips').appendChild(s)}
+function wipe(){
+  if(done)return;done=true;cancelAnimationFrame(raf);n.textContent='100';
+  boot.classList.add('wipe');
+  setTimeout(function(){boot.remove();root.classList.remove('lock')},800);
+}
+function tick(t){
+  t0=t0||t;var p=Math.min((t-t0)/DUR,1);
+  n.textContent=Math.round(100*(1-Math.pow(1-p,2.2)));
+  if(p<1)raf=requestAnimationFrame(tick);else setTimeout(wipe,120);
+}
+if(reduce){boot.remove()}else{root.classList.add('lock');raf=requestAnimationFrame(tick)}
+$('#skip').addEventListener('click',wipe);
+
+/* clock */
+function clock(){$('#clock').textContent=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+clock();setInterval(clock,20000);
+
+/* current section in the menu bar */
+var links=$$('.mb nav a');
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)links.forEach(function(a){a.classList.toggle('on',a.hash==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
+$$('main section').forEach(function(s){so.observe(s)});
+
+/* hidden easter egg: Konami code, or tap the ms.app icon five times */
+var egg=$('#egg'),ok=$('#eggOk');
+function showEgg(on){egg.hidden=!on;if(on)ok.focus()}
+ok.addEventListener('click',function(){showEgg(false)});
+egg.addEventListener('click',function(e){if(e.target===egg)showEgg(false)});
+var K=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'],ki=0;
+addEventListener('keydown',function(e){
+  if(e.key==='Escape'){showEgg(false);return}
+  var k=e.key.length===1?e.key.toLowerCase():e.key;
+  if(k===K[ki]){ki++;if(ki===K.length){ki=0;showEgg(true)}}else ki=(k===K[0])?1:0;
+});
+var mc=0,mt;
+$('#mono').addEventListener('click',function(){mc++;clearTimeout(mt);mt=setTimeout(function(){mc=0},900);if(mc>=5){mc=0;showEgg(true)}});
+console.log('%cHi Maharaja.sys here. Try the Konami code.','font:16px monospace');
+})();
+</script>
+</body>
+</html>
